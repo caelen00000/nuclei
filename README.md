@@ -6,7 +6,7 @@ I'm assuming you are running this on the lab workstation. With a little effort, 
 
 1. Install the latest versions of R, RStudio, and Bioconductor.
 2. Install Ubuntu-24.04 under WSL. Instructions are [here](https://learn.microsoft.com/en-us/windows/wsl/basic-commands). It's important that you use 24.04 specifically and its possible that another version is already installed, so verify you have the correct one.
-4. Download this repository. If you are comfortable using git, you can make a fork and use it to track any changes you make, or you can just download it as a zip file. I recommend placing it in the C or Z drives since they are much faster and you're about to be manipulating some large files. Drives D an Y are better for archival purposes. Unless stated otherwise, all scripts I tell you to run should be ran from `working_dir`.
+4. Download this repository. If you are comfortable using git, you can make a fork and use it to track any changes you make, or you can just download it as a zip file. I recommend placing it in the C or Z drives since they are much faster and you're about to be manipulating some large files. Drives D and Y are better for archival purposes. Unless stated otherwise, all scripts I tell you to run should be ran from `working_dir`.
 5. In Ubuntu, install a python package manager (unless it already comes with one, I forget). My scripts are tested with [this one](https://conda-forge.org/download/), but others might also work.
 6. Run create_cellbender_env.sh to install CellBender into a new conda environment called `cellbender`. Note that this installs my own customized version of CellBender which includes a bug fix for compatibility with our GPU, so if it breaks that's my fault.
 7. 
@@ -37,11 +37,11 @@ This one uses expectation maximization to distribute counts from multimappers to
 --soloMultiMappers EM
 ```
 
-The STARsolo output is in 'Z:\Caelen\snRNAseq_v2'. If you look in each sample's Solo.out directory, you'll see several subdirectories. `Gene`, `GeneFull`, and `GeneFull_Ex50pAS` each have the quantification results. `GeneFull_Ex50pAS` is the one we care about. Read the STAR documentation if you want to know why. There is also `SJ` which has splice junction information if that's something you're interested in. Finally, we have 'Velocyto'. This one splits the counts into categories based on whether or not they appear to have originated from spliced vs unspliced mRNA. This is useful for velocity analysis and some cell calling techniques.
+The STARsolo output is in `Z:\Caelen\snRNAseq_v2`. If you look in each sample's Solo.out directory, you'll see several subdirectories. `Gene`, `GeneFull`, and `GeneFull_Ex50pAS` each have the quantification results. `GeneFull_Ex50pAS` is the one we care about. Read the STAR documentation if you want to know why. There is also `SJ` which has splice junction information if that's something you're interested in. Finally, we have `Velocyto`. This one splits the counts into categories based on whether or not they appear to have originated from spliced vs unspliced mRNA. This is useful for velocity analysis and some cell calling techniques.
 
 In 'GeneFull_Ex50pAS', we have filtered counts, which have already had rudimentary empty droplet calling applied, and 3 types of raw counts. `raw` doesn't include multimappers, `raw_multi` does, and `raw_multi_floor` also does but the counts are guaranteed to be integers. I made this one since many downstream programs break with the non-integer counts introduced by EM.
 
-I have also tabulated the various statistics output from all the STARsolo runs in 'Z:\Caelen\snRNAseq_v2\STAR_stats.xlsx'. If any of you come up with any theories that explain the graphs in that file, I'm all ears.
+I have also tabulated the various statistics output from all the STARsolo runs in `Z:\Caelen\snRNAseq_v2\STAR_stats.xlsx`. If any of you come up with any theories that explain the graphs in that file, I'm all ears.
 
 ## Empty Droplet Calling & Background Removal
 
