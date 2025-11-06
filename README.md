@@ -1,5 +1,9 @@
 # nuclei
 
+This is a work-in-progress guide on replicating my pupa developmental snRNASeq analysis. I'm trying to make it as painless to run as is possible, but I'm sure I've forgotten several key points. Let me know if you run into any issues you can't fix on your own.
+
+Also, I'll note that you shouldn't just blindly run stuff. Read the code beforehand and try to vaguely understand what's going on. Particularly, I've hardcoded a lot of file locations that may or may not apply to you. Also, a lot of my scripts and the tools they call have fun options that I probably failed to mention here.
+
 ## Setup
 
 I'm assuming you are running this on the lab workstation. With a little effort, everything here should be replicable on other Windows and/or Linux systems (Macs would take some work) with the appropriate hardware, i.e a lot of memory (maybe ~32GB, likely more) and a recent Nvidia (or AMD, with some hacks) dedicated GPU.
@@ -9,7 +13,7 @@ I'm assuming you are running this on the lab workstation. With a little effort, 
 4. Download this repository. If you are comfortable using git, you can make a fork and use it to track any changes you make, or you can just download it as a zip file. I recommend placing it in the C or Z drives since they are much faster and you're about to be manipulating some large files. Drives D and Y are better for archival purposes. Unless stated otherwise, all scripts I tell you to run should be ran from `working_dir`.
 5. In Ubuntu, install a python package manager (unless it already comes with one, I forget). My scripts are tested with [this one](https://conda-forge.org/download/), but others might also work.
 6. Run create_cellbender_env.sh to install CellBender into a new conda environment called `cellbender`. Note that this installs my own customized version of CellBender which includes a bug fix for compatibility with our GPU, so if it breaks that's my fault.
-7. 
+7. TODO: whatever I forgot
 
 ## Mapping & Quantification
 
@@ -23,9 +27,9 @@ I've experimented with several mappers: CellRanger, STARsolo, and alevin-fry. Fo
 
 I aligned to the FlyBase v6.62 reference. 10x provides filtered genome annotations that may increase the unique mapping rate, but only for human and mouse. I'm working on a modified drosophila reference, but its going very slowly and it looks like I'll have to manually edit ~1000 gene records.
 
-My STARsolo scripts are in 'mapping_and_quantification'. You'll notice that I'm using a whole lot of nonstandard options. Most of these are to mimic the output of CellRanger or are settings for 3'v3.1 reads, but let me explain some of the others:
+My STARsolo scripts are in `mapping_and_quantification`. You'll notice that I'm using a whole lot of nonstandard options. Most of these are to mimic the output of CellRanger or are settings for 3'v3.1 reads, but let me explain some of the others:
 
-Basically, these are optimizations for future analysis of transposable elements. They allow more multimappers to be output to the BAM file.
+Basically, these are optimizations for future analysis of transposable elements. They allow more multimappers to be output to the BAM file, which you'll note is actually not being output. This is to save space because this would take ~2.5TB of storage.
 ```
 --winAnchorMultimapNmax 100
 --outFilterMultimapNmax 100
