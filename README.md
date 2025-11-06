@@ -2,7 +2,7 @@
 
 ## Setup
 
-I'm assuming you are running this on the lab workstation. With a little effort, everything here should be replicable on other Windows and/or Linux systems (Macs would take some work) with the appropriate hardware, i.e a lot of memory (maybe ~32GB, likely more) and a recent Nvidea (or AMD, with some hacks) dedicated GPU.
+I'm assuming you are running this on the lab workstation. With a little effort, everything here should be replicable on other Windows and/or Linux systems (Macs would take some work) with the appropriate hardware, i.e a lot of memory (maybe ~32GB, likely more) and a recent Nvidia (or AMD, with some hacks) dedicated GPU.
 
 1. Install the latest versions of R, RStudio, and Bioconductor.
 2. Install Ubuntu-24.04 under WSL. Instructions are [here](https://learn.microsoft.com/en-us/windows/wsl/basic-commands). It's important that you use 24.04 specifically and its possible that another version is already installed, so verify you have the correct one.
