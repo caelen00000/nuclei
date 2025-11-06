@@ -1,6 +1,6 @@
 # nuclei
 
-This is a work-in-progress guide on replicating my pupa developmental snRNASeq analysis. I'm trying to make it as painless to run as is possible, but I'm sure I've forgotten several key points. Let me know if you run into any issues you can't fix on your own.
+This is a work-in-progress guide on replicating my pupa developmental snRNASeq analysis. I'm trying to make it as painless to run as is possible, but I'm sure I've forgotten several key points. Let me know if you run into any issues.
 
 Also, I'll note that you shouldn't just blindly run stuff. Read the code beforehand and try to vaguely understand what's going on. Particularly, I've hardcoded a lot of file locations that may or may not apply to you. Also, a lot of my scripts and the tools they call have fun options that I probably failed to mention here.
 
@@ -10,10 +10,10 @@ I'm assuming you are running this on the lab workstation. With a little effort, 
 
 1. Install the latest versions of R, RStudio, and Bioconductor.
 2. Install Ubuntu-24.04 under WSL. Instructions are [here](https://learn.microsoft.com/en-us/windows/wsl/basic-commands). It's important that you use 24.04 specifically and its possible that another version is already installed, so verify you have the correct one.
-4. Download this repository. If you are comfortable using git, you can make a fork and use it to track any changes you make, or you can just download it as a zip file. I recommend placing it in the C or Z drives since they are much faster and you're about to be manipulating some large files. Drives D and Y are better for archival purposes. Unless stated otherwise, all scripts I tell you to run should be ran from `working_dir`.
+4. Download this repository. If you are comfortable using git, you can make a fork and use it to track any changes you make, or you can just download it as a zip file. I recommend placing it in the C or Z drives since they are much faster and you're about to be manipulating some large files. Drives D and Y are better for archival purposes. Unless stated otherwise, all scripts or code I tell you to run should be ran from `working_dir`, but for some it doesn't matter.
 5. In Ubuntu, install a python package manager (unless it already comes with one, I forget). My scripts are tested with [this one](https://conda-forge.org/download/), but others might also work.
-6. Run `create_cellbender_env.sh` to install CellBender into a new conda environment called `cellbender`. Note that this installs my own customized version of CellBender which includes a bug fix for compatibility with our GPU, so if it breaks that's my fault.
-7. Run `conda create --name scvi --file scvi_packages.txt` to create a new conda environment called `scvi`. This will install a whole bunch of packages.
+6. Run `../setup/create_cellbender_env.sh` to install CellBender into a new conda environment called `cellbender`. Note that this installs my own customized version of CellBender which includes a bug fix for compatibility with our GPU, so if it breaks that's my fault.
+7. Run `conda create --name scvi --file ../scvi_packages.txt` to create a new conda environment called `scvi`. This will install a whole bunch of packages.
 8. In Windows, load up your favorite Python IDE. I like PyCharm, and you can use your .edu email to get the [GitHub Student Developer Pack](https://education.github.com/pack), which includes PyCharm Pro.
 9. In your Python IDE, configure your interpreter to use the scvi environment you just created in WSL. Instructions for doing so using PyCharm are [here](https://www.jetbrains.com/help/pycharm/using-wsl-as-a-remote-interpreter.html).
 8. TODO: whatever I forgot
@@ -63,3 +63,4 @@ For convieniently running CellBender on many samples, I have also included `run_
 Once its done running, you will have the output in the working directory. Each one will have a report which must be closely scrutinized before continuing. Check out the [documentation](https://cellbender.readthedocs.io/en/latest/index.html) to see what you are looking for and how to fix it, if needed. Even if you ran it with default settings, especially if you included multimappers, it can spit out nonsensical results.
 
 ## Cell Calling
+TODO
