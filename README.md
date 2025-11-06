@@ -13,7 +13,10 @@ I'm assuming you are running this on the lab workstation. With a little effort, 
 4. Download this repository. If you are comfortable using git, you can make a fork and use it to track any changes you make, or you can just download it as a zip file. I recommend placing it in the C or Z drives since they are much faster and you're about to be manipulating some large files. Drives D and Y are better for archival purposes. Unless stated otherwise, all scripts I tell you to run should be ran from `working_dir`.
 5. In Ubuntu, install a python package manager (unless it already comes with one, I forget). My scripts are tested with [this one](https://conda-forge.org/download/), but others might also work.
 6. Run create_cellbender_env.sh to install CellBender into a new conda environment called `cellbender`. Note that this installs my own customized version of CellBender which includes a bug fix for compatibility with our GPU, so if it breaks that's my fault.
-7. TODO: whatever I forgot
+7. Run `conda create --name scvi --file scvi_packages.txt` to create a new conda environment called `scvi`. This will install a whole bunch of packages.
+8. In Windows, load up your favorite Python IDE. I like PyCharm, and you can use your .edu email to get the [GitHub Student Developer Pack](https://education.github.com/pack), which includes PyCharm Pro.
+9. In your Python IDE, configure your interpreter to use the scvi environment you just created in WSL. Instructions for doing so using PyCharm are [here](https://www.jetbrains.com/help/pycharm/using-wsl-as-a-remote-interpreter.html).
+8. TODO: whatever I forgot
 
 ## Mapping & Quantification
 
