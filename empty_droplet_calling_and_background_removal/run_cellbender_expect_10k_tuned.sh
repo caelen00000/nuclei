@@ -31,7 +31,7 @@ cellbender remove-background \
 --expected-cells 10000  \
 --checkpoint-mins 1000000 \
 --estimator-multiple-cpu \
---total-droplets-included 20000 \
+--total-droplets-included 25000 \
 --learning-rate 0.00005
 
 rm ckpt.tar.gz
