@@ -42,7 +42,9 @@ cellbender_h5_to_h5ad <- function(cellbender_dir,
                                   genotype,
                                   library_list,
                                   out_dir){
-  dir.create(out_dir, showWarnings = FALSE)
+  dir.create(out_dir,
+             recursive = TRUE,
+             showWarnings = FALSE)
   
   for(library in library_list){
     library_id <- paste0(genotype, "_", library)
@@ -90,7 +92,7 @@ cellbender_h5_to_h5ad <- function(cellbender_dir,
   }
 }
 
-cellbender_h5_to_h5ad(cellbender_dir = "cellbender\\concat_all_multimapper_em_1st_pass_auto",
+cellbender_h5_to_h5ad(cellbender_dir = "cellbender\\concat_all_multimapper_em_1st_pass_expect_10k_tuned",
                       genotype       = "wildtype",
                       library_list   = c("a0_s1", "a0_s2",
                                          "p1_s1", "p1_s2",
@@ -98,7 +100,7 @@ cellbender_h5_to_h5ad(cellbender_dir = "cellbender\\concat_all_multimapper_em_1s
                                          "p3_s1", "p3_s2",
                                          "p4_s1", "p4_s2",
                                          "wp_s1", "wp_s2"),
-                      out_dir        = "raw_h5ad")
+                      out_dir        = "cellbender_h5ad\\expect_10k_tuned")
 
 
 
