@@ -62,5 +62,16 @@ For convieniently running CellBender on many samples, I have also included `run_
 
 Once its done running, you will have the output in the working directory. Each one will have a report which must be closely scrutinized before continuing. Check out the [documentation](https://cellbender.readthedocs.io/en/latest/index.html) to see what you are looking for and how to fix it, if needed. Even if you ran it with default settings, especially if you included multimappers, it can spit out nonsensical results.
 
-## Cell Calling
-TODO
+## Preprocessing
+
+At first, I tried to do the whole analysis in R using Seurat, but with 100k+ cells, its real slow. I've rewritten most of it in python using scvi-tools, but this first step requires you to run the function `cellbender_h5_to_h5ad` in `preprocessing/preprocess.R`. Check out the documentation to see what it does, and don't forget to change file locations where needed. Also, when installing the needed R libraries, if any of them prompt you to compile from source, you should do so for performance reasons.
+
+Now that we are only using python, everything will be done from the `pupa_project` directory, which you should be able to import as a PyCharm project. In it, you'll find `FCA_preprocessing.ipynb`, which you don't have to run unless you want to change anything (which may be a good idea). Otherwise, the output is in `Z:\Caelen\snRNAseq_v2`. It mostly just filters the Fly Cell Atlas down to relevant cells.
+
+## Final Calling and Clustering by Stage
+
+We can finally start the fun part. First, run `cluster_by_stage_a0.ipynb`. This plots a whole bunch of quality control metrics. Based on these, you will have to choose which nuclei you think are worth considering in the rest of the analysis. Currently, I am only arbitrarily removing extreme outliers, but there are numerous other more sophisticated methods that could be used here and would be something worth researching and testing. Note that the values I have chosen are specific to the wildtype a0 stage, and you will have to tune these differently for each stage. I recommend making a copy of `cluster_by_stage_a0` for each stage so you can keep track of everything. Anyway, next we use SCVI for integration, batch correction, and dimensionality reduction. I go over it a little in the file, but I would read the documentation for SCVI, scanpy, and anndata so that you know what is going on. Finally, we write a .h5ad to be read by cellxgene, and a .cloupe file for Loupe Browser. You can check these out in their respective programs and run differential expression, manually make clusters, etc.
+
+## Integrate Everything and Predict Cell Types
+
+Once you have `cluster_by_stage` on every stage, you can combine them all with `cluster_all.ipynb`. The methods are similar to the per-stage version. After this, we integrate everything with a subset of the Fly Cell Atlas. At this point, I hope you like waiting, because things get slow with 400k cells. scANVI is used to project cell types from the FCA onto our data. Its very important to note that these are by no means correct. For one, this depends on the quality of the integration, which at this point is not great. Another issue is that the FCA only has adults, so its taking a wild guess at predicting mutant or non-adult cell types. But, these can be used as a starting point for manual annotation.
